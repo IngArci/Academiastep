@@ -2,8 +2,9 @@ import { Link } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { CheckCircle } from 'lucide-react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { AnimatedImage } from '../components/AnimatedImage';
 import { CountingAnimation } from '../components/CountingAnimation';
+import { motion } from 'motion/react';
 
 export default function Home() {
   const stats = [
@@ -27,33 +28,40 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0">
-          <ImageWithFallback 
+          <AnimatedImage 
             src="https://images.unsplash.com/photo-1763770446725-1086cbb36d98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwZW5nbGlzaCUyMGNsYXNzcm9vbXxlbnwxfHx8fDE3NzAxNzY3OTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
             alt="Students learning English"
             className="w-full h-full object-cover"
+            animationType="zoom"
           />
           <div className="absolute inset-0 bg-primary/70"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl mb-6">
-            Aprende Inglés<br />
-            <span className="text-accent">Paso a Paso</span>
-          </h1>
-          <p className="text-xl mb-8 max-w-2xl">
-            Formación personalizada y flexible para niños, jóvenes y adultos. Clases presenciales a domicilio y virtuales por Zoom con la metodología MUR.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/contacto">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Inscríbete Ahora
-              </Button>
-            </Link>
-            <Link to="/nosotros">
-              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
-                Más Información
-              </Button>
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl mb-6">
+              Aprende Inglés<br />
+              <span className="text-accent">Paso a Paso</span>
+            </h1>
+            <p className="text-xl mb-8 max-w-2xl">
+              Formación personalizada y flexible para niños, jóvenes y adultos. Clases presenciales a domicilio y virtuales por Zoom con la metodología MUR.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contacto">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                  Inscríbete Ahora
+                </Button>
+              </Link>
+              <Link to="/nosotros">
+                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
+                  Más Información
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -79,7 +87,12 @@ export default function Home() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
               <h2 className="mb-6">¿Quiénes Somos?</h2>
               <p className="text-muted-foreground mb-4">
                 Step by Step es una academia de inglés dedicada a ofrecer formación personalizada, flexible y orientada a resultados, dirigida a niños, jóvenes y adultos entre los 7 y 50 años.
@@ -95,12 +108,13 @@ export default function Home() {
                   Conoce más sobre nosotros
                 </Button>
               </Link>
-            </div>
+            </motion.div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <ImageWithFallback 
+              <AnimatedImage 
                 src="https://images.unsplash.com/photo-1563807893528-313039d9761f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFjaGVyJTIwdGVhY2hpbmclMjBsYW5ndWFnZSUyMGNsYXNzfGVufDF8fHx8MTc3MDIxODc1NXww&ixlib=rb-4.1.0&q=80&w=1080"
                 alt="Teacher teaching"
                 className="w-full h-full object-cover"
+                animationType="slideLeft"
               />
             </div>
           </div>

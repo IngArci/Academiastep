@@ -2,7 +2,8 @@ import { Link } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { BookOpen, Users, Award, Home, Video, GraduationCap, Briefcase, Clock } from 'lucide-react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { AnimatedImage } from '../components/AnimatedImage';
+import { motion } from 'motion/react';
 
 export default function Programs() {
   const programs = [
@@ -119,16 +120,30 @@ export default function Programs() {
               id={program.id}
               className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
             >
-              <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+              <motion.div 
+                className={index % 2 === 1 ? 'lg:order-2' : ''}
+                initial={{ opacity: 0, x: index % 2 === 1 ? 30 : -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
                 <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-                  <ImageWithFallback 
+                  <AnimatedImage 
                     src={program.image}
                     alt={program.title}
                     className="w-full h-full object-cover"
+                    animationType="scale"
+                    delay={0.2}
                   />
                 </div>
-              </div>
-              <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
+              </motion.div>
+              <motion.div 
+                className={index % 2 === 1 ? 'lg:order-1' : ''}
+                initial={{ opacity: 0, x: index % 2 === 1 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
                 <div className={`bg-${program.color}/10 text-${program.color} w-16 h-16 rounded-lg flex items-center justify-center mb-4`}>
                   {program.icon}
                 </div>
@@ -156,7 +171,7 @@ export default function Programs() {
                     Solicita Información
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
@@ -170,25 +185,34 @@ export default function Programs() {
             Elige la modalidad que mejor se adapte a tu estilo de vida y necesidades
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {modalities.map((modality) => (
-              <Card key={modality.id} className="overflow-hidden hover:shadow-xl transition-shadow bg-white">
-                <div className="h-48 overflow-hidden">
-                  <ImageWithFallback 
-                    src={modality.image}
-                    alt={modality.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-secondary/10 text-secondary p-4 rounded-full">
-                      {modality.icon}
-                    </div>
+            {modalities.map((modality, index) => (
+              <motion.div
+                key={modality.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden hover:shadow-xl transition-shadow bg-white">
+                  <div className="h-48 overflow-hidden">
+                    <AnimatedImage 
+                      src={modality.image}
+                      alt={modality.title}
+                      className="w-full h-full object-cover"
+                      animationType="zoom"
+                    />
                   </div>
-                  <h3 className="mb-3">{modality.title}</h3>
-                  <p className="text-muted-foreground">{modality.description}</p>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-6 text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="bg-secondary/10 text-secondary p-4 rounded-full">
+                        {modality.icon}
+                      </div>
+                    </div>
+                    <h3 className="mb-3">{modality.title}</h3>
+                    <p className="text-muted-foreground">{modality.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>

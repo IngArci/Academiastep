@@ -2,7 +2,8 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
-import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Clock, MessageCircle } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function Contact() {
   return (
@@ -22,7 +23,12 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
               <h2 className="mb-6">Información de Contacto</h2>
               <p className="text-muted-foreground mb-8">
                 Ponte en contacto con nosotros a través de cualquiera de estos medios. Responderemos lo antes posible.
@@ -48,16 +54,6 @@ export default function Contact() {
                     <h4 className="mb-1">Email</h4>
                     <p className="text-muted-foreground">info@stepbystep.com</p>
                     <p className="text-sm text-muted-foreground mt-1">Respuesta en 24 horas</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="bg-accent text-accent-foreground p-3 rounded-lg flex-shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="mb-1">Dirección</h4>
-                    <p className="text-muted-foreground">Calle Principal 123<br />28001 Madrid, España</p>
                   </div>
                 </div>
 
@@ -96,12 +92,18 @@ export default function Contact() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="mb-6">Solicita Información</h3>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="mb-6">Solicita Información</h3>
                 <form className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block mb-2">Nombre completo *</label>
@@ -148,6 +150,7 @@ export default function Contact() {
                 </form>
               </CardContent>
             </Card>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -189,19 +192,6 @@ export default function Contact() {
                 </p>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Map Placeholder */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-8">Nuestra Ubicación</h2>
-          <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-              <p className="text-muted-foreground">Calle Principal 123, 28001 Madrid, España</p>
-            </div>
           </div>
         </div>
       </section>

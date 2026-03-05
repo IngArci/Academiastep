@@ -1,6 +1,7 @@
 import { Card, CardContent } from '../components/ui/card';
 import { Target, Eye, Heart, TrendingUp, Shield, Handshake, Award, CheckCircle } from 'lucide-react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { AnimatedImage } from '../components/AnimatedImage';
+import { motion } from 'motion/react';
 
 export default function About() {
   const values = [
@@ -52,39 +53,47 @@ export default function About() {
       <section id="mision-vision" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="border-l-4 border-l-primary">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-primary text-primary-foreground p-3 rounded-lg">
-                    <Target className="w-8 h-8" />
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="border-l-4 border-l-primary">
+                <CardContent className="p-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-primary text-primary-foreground p-3 rounded-lg">
+                      <Target className="w-8 h-8" />
+                    </div>
+                    <h2>Nuestra Misión</h2>
                   </div>
-                  <h2>Nuestra Misión</h2>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  Enseñar inglés a niños, jóvenes y adultos a través de clases personalizadas, tanto virtuales como presenciales, fortaleciendo sus habilidades comunicativas y preparándolos para certificaciones internacionales.
-                </p>
-                <p className="text-muted-foreground">
-                  Nos proponemos que en 3 a 4 meses, al menos el 80% de nuestros estudiantes logre mejorar su nivel de inglés, y que un 50% acceda a certificaciones internacionales o a oportunidades laborales.
-                </p>
-              </CardContent>
-            </Card>
+                  <p className="text-muted-foreground">
+                    Brindar las herramientas y conocimientos, a las personas con las cuales puedan explotar sus talentos y desarrollar su capacidad personal e intelectual mediante el aprendizaje en distintos campos.
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-            <Card className="border-l-4 border-l-secondary">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-secondary text-secondary-foreground p-3 rounded-lg">
-                    <Eye className="w-8 h-8" />
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="border-l-4 border-l-secondary">
+                <CardContent className="p-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-secondary text-secondary-foreground p-3 rounded-lg">
+                      <Eye className="w-8 h-8" />
+                    </div>
+                    <h2>Nuestra Visión</h2>
                   </div>
-                  <h2>Nuestra Visión</h2>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  En 2030, queremos ser la academia de inglés referente en la región, un espacio donde miles de estudiantes transformen sus sueños en oportunidades reales.
-                </p>
-                <p className="text-muted-foreground">
-                  Nos proyectamos con más de 5,000 graduados, de los cuales al menos un 40% alcance certificaciones internacionales o empleos bilingües, convirtiendo el inglés en la llave que abre puertas al mundo académico y laboral.
-                </p>
-              </CardContent>
-            </Card>
+                  <p className="text-muted-foreground">
+                    Para 2030, transformaremos la vida de quienes completen nuestros cursos mediante metodologías innovadoras y conceptos que fortalecerán su desarrollo académico, profesional y personal, elevando su calidad de vida.
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -92,21 +101,36 @@ export default function About() {
       {/* Values Section */}
       <section id="valores" className="py-16 bg-gradient-to-br from-secondary/15 to-accent/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-4">Nuestros Valores</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Los principios que guían nuestra forma de enseñar y acompañar a cada estudiante
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-center mb-4">Nuestros Valores</h2>
+            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Los principios que guían nuestra forma de enseñar y acompañar a cada estudiante
+            </p>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow bg-white">
-                <CardContent className="p-6">
-                  <div className="bg-accent/10 text-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                    {value.icon}
-                  </div>
-                  <h3 className="mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm">{value.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="hover:shadow-lg transition-shadow bg-white">
+                  <CardContent className="p-6">
+                    <div className="bg-accent/10 text-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
+                      {value.icon}
+                    </div>
+                    <h3 className="mb-2">{value.title}</h3>
+                    <p className="text-muted-foreground text-sm">{value.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -117,13 +141,19 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <ImageWithFallback 
+              <AnimatedImage 
                 src="https://images.unsplash.com/photo-1759560270562-468e8ba866e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdWNjZXNzJTIwYWNoaWV2ZW1lbnQlMjBjZXJ0aWZpY2F0ZXxlbnwxfHx8fDE3NzAyMTkwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
                 alt="Success achievement"
                 className="w-full h-full object-cover"
+                animationType="scale"
               />
             </div>
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
               <h2 className="mb-6">Metodología MUR</h2>
               <p className="text-muted-foreground mb-6">
                 Nuestra metodología MUR (Metodología Única y Resultados) es un sistema probado que garantiza un proceso de aprendizaje efectivo y adaptado a cada perfil. Combina:
@@ -158,7 +188,7 @@ export default function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
