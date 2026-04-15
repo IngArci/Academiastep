@@ -1,7 +1,7 @@
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '34600123456'; // Número de WhatsApp sin el símbolo +
+  const phoneNumber = '573184619864'; // Número de WhatsApp sin el símbolo +
   const message = '¡Hola! Me gustaría recibir más información sobre los cursos de Step by Step.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
